@@ -31,3 +31,14 @@ project-root/
 │── styles/                  # global styles (ถ้าใช้ tailwind ก็อยู่ global.css)
 │── tsconfig.json            # path alias config
 │── package.json
+
+//ลบ migrations ทั้งหมด
+rm -rf prisma/migrations
+
+//รีเซ็ตฐานข้อมูล (ล้างทุก table + data)
+npx prisma migrate reset
+
+//รัน migrations
+npx prisma migrate dev --name init
+
+npx prisma studio

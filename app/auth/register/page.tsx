@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Company } from "../../../types/company";
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -13,9 +14,7 @@ export default function SignUp() {
   const [success, setSuccess] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const [companies, setCompanies] = useState<
-    { company_id: number; company_name: string }[]
-  >([]);
+  const [companies, setCompanies] = useState<Company[]>([]);
   const [companyId, setCompanyId] = useState<number | undefined>(undefined);
 
   useEffect(() => {
@@ -71,6 +70,7 @@ export default function SignUp() {
       }
     } catch (err) {
       setError("เกิดข้อผิดพลาดในการสมัครสมาชิก");
+      console.error(err);
     } finally {
       setIsLoading(false);
     }

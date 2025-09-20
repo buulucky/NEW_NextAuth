@@ -1,30 +1,60 @@
-import { Employee } from "@/types/employee";
+import { EmployeeTableData } from "@/types/employee-table";
 
 interface Props {
-  employees: Employee[];
+  employees: EmployeeTableData[];
 }
 
 export default function EmployeeTable({ employees }: Props) {
   return (
-    <table className="table-auto border-collapse border border-gray-300 w-full">
-      <thead>
+    <table className="min-w-full divide-y divide-gray-300">
+      <thead className="bg-gray-50">
         <tr>
-          <th className="border border-gray-300 px-4 py-2">Prefix</th>
-          <th className="border border-gray-300 px-4 py-2">First Name</th>
-          <th className="border border-gray-300 px-4 py-2">Last Name</th>
-          <th className="border border-gray-300 px-4 py-2">Birth Date</th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            เลขบัตรประชาชน
+          </th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            รหัสพนักงาน
+          </th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            ชื่อ-นามสกุล
+          </th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            เลข PO
+          </th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            ตำแหน่งงาน
+          </th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            วันที่เริ่มงาน
+          </th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            สถานะอบรม
+          </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className="bg-white divide-y divide-gray-200">
         {employees.map((employee) => (
           <tr key={employee.employee_id}>
-            <td className="border border-gray-300 px-4 py-2">{employee.prefix_th}</td>
-            <td className="border border-gray-300 px-4 py-2">{employee.first_name_th}</td>
-            <td className="border border-gray-300 px-4 py-2">{employee.last_name_th}</td>
-            <td className="border border-gray-300 px-4 py-2">
-              {employee.birth_date
-                ? new Date(employee.birth_date).toLocaleDateString()
-                : "-"}
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              {employee.personal_id}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              {employee.employee_code}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              {employee.prefix_th} {employee.first_name_th} {employee.last_name_th}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              {employee.po_number}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              {employee.position_name}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              {new Date(employee.start_date).toLocaleDateString('th-TH')}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              {employee.training_status}
             </td>
           </tr>
         ))}

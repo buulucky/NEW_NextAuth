@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET() {
   try {
-    const companies = await prisma.companies.findMany();
+    const companies = await prisma.company.findMany();
     return NextResponse.json(companies);
   } catch (error) {
     console.error('API Error:', error);

@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 import EmployeeTable from "../components/EmployeeTable";
 import { fetchEmployees } from "@/lib/api/employees";
-
-import { Employee } from "@/types/employee";
+import { EmployeeTableData } from "@/types/employee-table";
 
 export default function EmployeePage() {
-  const [employees, setEmployees] = useState<Employee[]>([]);
+  const [employees, setEmployees] = useState<EmployeeTableData[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,10 +16,14 @@ export default function EmployeePage() {
         setEmployees(data);
       } catch (err) {
         console.error(err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
   }, []);
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <div>

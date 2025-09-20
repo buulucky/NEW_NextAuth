@@ -28,7 +28,7 @@ model User {
   status        UserStatus @default(PENDING)
   company_id    Int?
 
-  company       Companies? @relation(fields: [company_id], references: [company_id])
+  company       Company? @relation(fields: [company_id], references: [company_id])
 
   accounts Account[]
   sessions Session[]
@@ -93,6 +93,8 @@ model Division {
   division_id          Int         @id @default(autoincrement())
   division_name        String
   departments          Department[]
+
+  @@map("divisions")
 }
 
 model Department {
@@ -100,15 +102,21 @@ model Department {
   department_name     String
   division_id         Int
   division            Division    @relation(fields: [division_id], references: [division_id])
+  po Po[]
+
+  @@map("departments")
 }
 
-model Companies {
+model Company {
   company_id   Int     @id @default(autoincrement())
   company_name String
   users User[]
+  po Po[]
+
+  @@map("Companies")
 }
 
-model Employees {
+model Employee {
   employee_id   Int       @id @default(autoincrement())
   personal_id   String    @unique
   prefix_th     String
@@ -120,4 +128,61 @@ model Employees {
   birth_date    DateTime?
   created_at    DateTime  @default(now())
   updated_at    DateTime  @updatedAt
+
+  employee_contract EmployeeContract[]
+
+  @@map("employees")
 }
+
+model Position {
+  position_id   Int     @id @default(autoincrement())
+  position_name String
+  po Po[]
+
+  @@map("positions")
+}
+
+model Po {
+  po_id           Int         @id @default(autoincrement())
+  po_number       String      @unique
+  company_id      Int
+  department_id   Int
+  position_id     Int
+  start_date      DateTime
+  end_date        DateTime
+  created_at      DateTime    @default(now())
+  updated_at      DateTime    @updatedAt
+  employee_count  Int
+  po_type         String
+  company         Company     @relation(fields: [company_id], references: [company_id])
+  department      Department  @relation(fields: [department_id], references: [department_id])
+  position        Position    @relation(fields: [position_id], references: [position_id])
+
+  employee_contract EmployeeContract[]
+  @@map("pos")
+}
+
+model EmployeeContract {
+  employee_contract_id Int        @id @default(autoincrement())
+  employee_id          Int
+  po_id                Int
+  status               ContractStatus
+  start_date           DateTime
+  end_date             DateTime?
+  created_at           DateTime   @default(now())
+  updated_at           DateTime   @updatedAt
+  note                 String?
+  employee_code        String     @unique
+
+  employee             Employee  @relation(fields: [employee_id], references: [employee_id])
+  po                   Po        @relation(fields: [po_id], references: [po_id])
+
+  @@map("employee_contracts")
+}
+
+enum ContractStatus {
+  ACTIVE
+  INACTIVE
+  TERMINATED
+}
+

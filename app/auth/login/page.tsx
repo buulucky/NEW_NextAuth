@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { signIn, getSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -27,16 +27,11 @@ export default function SignIn() {
       if (result?.error) {
         setError("อีเมลหรือรหัสผ่านไม่ถูกต้อง");
       } else {
-        // ตรวจสอบ session และ redirect ตาม role
-        const session = await getSession();
-        if (session?.user?.role === "ADMIN") {
-          router.push("/admin");
-        } else {
-          router.push("/dashboard");
-        }
+        router.push("/");
       }
     } catch (err) {
       setError("เกิดข้อผิดพลาดในการเข้าสู่ระบบ");
+      console.error(err);
     } finally {
       setIsLoading(false);
     }
