@@ -104,7 +104,7 @@ export default function SignIn() {
           <div className="text-center">
             <span className="text-sm text-gray-600">
               ยังไม่มีบัญชี?{' '}
-              <Link href="/auth/signup" className="font-medium text-indigo-600 hover:text-indigo-500">
+              <Link href="/auth/register" className="font-medium text-indigo-600 hover:text-indigo-500">
                 สมัครสมาชิก
               </Link>
             </span>

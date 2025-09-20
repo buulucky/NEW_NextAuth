@@ -8,6 +8,7 @@ const registerSchema = z.object({
   name: z.string().min(2, 'ชื่อต้องมีอย่างน้อย 2 ตัวอักษร'),
   email: z.string().email('กรุณาใส่อีเมลที่ถูกต้อง'),
   password: z.string().min(6, 'รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร'),
+  company_id: z.number().min(1, 'กรุณาเลือกบริษัท'),
 })
 
 export async function POST(request: NextRequest) {
@@ -26,7 +27,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const { name, email, password } = validation.data
+    const { name, email, password, company_id } = validation.data
 
     // ตรวจสอบว่าอีเมลนี้มีอยู่แล้วหรือไม่
     const existingUser = await prisma.user.findUnique({
@@ -50,6 +51,7 @@ export async function POST(request: NextRequest) {
         email,
         password: hashedPassword,
         role: 'USER', // Default role
+        company_id: company_id,
       },
       select: {
         id: true,

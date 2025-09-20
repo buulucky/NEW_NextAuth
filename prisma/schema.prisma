@@ -25,11 +25,14 @@ model User {
   image         String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+  status        UserStatus @default(PENDING)
+  company_id    Int?
 
-  // NextAuth.js relations
+  company       Companies? @relation(fields: [company_id], references: [company_id])
+
   accounts Account[]
   sessions Session[]
-  
+
   @@map("users")
 }
 
@@ -75,8 +78,46 @@ model VerificationToken {
   @@map("verificationtokens")
 }
 
-// Role enum สำหรับการจัดการสิทธิ์
 enum Role {
   USER
   ADMIN
+}
+
+enum UserStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model Division {
+  division_id          Int         @id @default(autoincrement())
+  division_name        String
+  departments          Department[]
+}
+
+model Department {
+  department_id       Int         @id @default(autoincrement())
+  department_name     String
+  division_id         Int
+  division            Division    @relation(fields: [division_id], references: [division_id])
+}
+
+model Companies {
+  company_id   Int     @id @default(autoincrement())
+  company_name String
+  users User[]
+}
+
+model Employees {
+  employee_id   Int       @id @default(autoincrement())
+  personal_id   String    @unique
+  prefix_th     String
+  first_name_th String
+  last_name_th  String
+  prefix_en     String?
+  first_name_en String?
+  last_name_en  String?
+  birth_date    DateTime?
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
 }
