@@ -13,7 +13,9 @@ export default function SignUp() {
   const [success, setSuccess] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const [companies, setCompanies] = useState<any[]>([]);
+  const [companies, setCompanies] = useState<
+    { company_id: number; company_name: string }[]
+  >([]);
   const [companyId, setCompanyId] = useState<number | undefined>(undefined);
 
   useEffect(() => {
@@ -67,7 +69,7 @@ export default function SignUp() {
           router.push("/auth/login");
         }, 2000);
       }
-    } catch (error) {
+    } catch (err) {
       setError("เกิดข้อผิดพลาดในการสมัครสมาชิก");
     } finally {
       setIsLoading(false);

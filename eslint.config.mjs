@@ -18,6 +18,7 @@ const eslintConfig = [
       "out/**",
       "build/**",
       "next-env.d.ts",
+      "app/generated/**", // ปิด ESLint สำหรับไฟล์ที่ generate จาก Prisma
     ],
   },
 ];
