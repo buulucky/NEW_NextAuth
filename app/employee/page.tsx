@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import EmployeeTable from "../components/employees/EmployeeTable";
 import { fetchEmployees } from "@/lib/api/employees/employees";
 import { EmployeeTableData } from "@/types/employee-table";
+import AddEmployeeButton from "../components/employees/AddEmployeeButton";
 
 export default function EmployeePage() {
   const [employees, setEmployees] = useState<EmployeeTableData[]>([]);
@@ -28,6 +29,7 @@ export default function EmployeePage() {
   return (
     <div>
       <EmployeeTable employees={employees} />
+      <AddEmployeeButton />
     </div>
   );
 }

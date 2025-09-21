@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useModal } from "@/components/providers/ModalProvider";
+import { useModal } from "../providers/ModalProvider";
 import { EmployeeForm } from "./EmployeeForm";
 import { EmployeeFormData } from "@/lib/validations/employee";
 import { useState } from "react";
@@ -33,7 +33,12 @@ export default function AddEmployeeButton() {
   return (
     <Button
       onClick={() =>
-        openModal(<EmployeeForm onSubmit={handleCreate} loading={loading} />)
+        openModal(
+          <>
+            <EmployeeForm onSubmit={handleCreate} loading={loading} />
+          </>,
+          "เพิ่มพนักงานใหม่"
+        )
       }
     >
       + เพิ่มพนักงาน
