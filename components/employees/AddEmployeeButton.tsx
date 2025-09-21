@@ -37,7 +37,8 @@ export default function AddEmployeeButton() {
           <>
             <EmployeeForm onSubmit={handleCreate} loading={loading} />
           </>,
-          "เพิ่มพนักงานใหม่"
+          "เพิ่มพนักงาน",
+          "กรุณากรอกข้อมูลพนักงานให้ครบทุกช่อง"
         )
       }
     >
