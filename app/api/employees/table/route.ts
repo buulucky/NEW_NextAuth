@@ -41,7 +41,6 @@ export async function GET() {
       po_number: contract.po.po_number,
       position_name: contract.po.position?.position_name || "ไม่ระบุ",
       start_date: contract.start_date,
-      training_status: contract.status || "ไม่ระบุ"
     }));
 
     return NextResponse.json(transformedData);

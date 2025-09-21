@@ -27,14 +27,11 @@ export default function EmployeeTable({ employees }: Props) {
           <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
             วันที่เริ่มงาน
           </th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-            สถานะอบรม
-          </th>
         </tr>
       </thead>
       <tbody className="bg-white divide-y divide-gray-200">
         {employees.map((employee) => (
-          <tr key={employee.employee_id}>
+          <tr key={employee.employee_id} className='hover:bg-purple-100 cursor-pointer'>
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
               {employee.personal_id}
             </td>
@@ -52,9 +49,6 @@ export default function EmployeeTable({ employees }: Props) {
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
               {new Date(employee.start_date).toLocaleDateString('th-TH')}
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-              {employee.training_status}
             </td>
           </tr>
         ))}

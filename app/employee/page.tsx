@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import EmployeeTable from "../components/EmployeeTable";
-import { fetchEmployees } from "@/lib/api/employees";
+import EmployeeTable from "../components/employees/EmployeeTable";
+import { fetchEmployees } from "@/lib/api/employees/employees";
 import { EmployeeTableData } from "@/types/employee-table";
 
 export default function EmployeePage() {
