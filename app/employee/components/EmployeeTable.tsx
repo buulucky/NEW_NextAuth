@@ -6,6 +6,7 @@ export default function EmployeeTable() {
 
   if (isLoading) return <p>กำลังโหลด...</p>;
   if (error) return <p>เกิดข้อผิดพลาด: {error.message}</p>;
+  if (!data || data.length === 0) return <p>ไม่พบข้อมูลพนักงาน</p>;
   
   return (
     <table className="min-w-full divide-y divide-gray-300">

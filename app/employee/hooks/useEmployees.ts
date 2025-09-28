@@ -5,9 +5,8 @@ import { EmployeeTableData } from "@/types/employee-table";
 
 export function useEmployees() {
   return useQuery<EmployeeTableData[], Error>({
-    queryKey: ["employees"], // key ที่ใช้แคช
-    queryFn: fetchEmployees, // ฟังก์ชันดึงข้อมูล
-    staleTime: 1000 * 30, // 30 วิ ก่อนรีเฟรชข้อมูล
-    initialData: [],
+    queryKey: ["employees"],
+    queryFn: () => fetchEmployees(),
+    staleTime: 30 * 1000,
   });
 }

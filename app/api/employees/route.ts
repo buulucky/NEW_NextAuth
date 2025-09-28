@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 export async function GET() {
+  
   try {
     const employeeContracts = await prisma.employeeContract.findMany({
       select: {
@@ -30,7 +31,6 @@ export async function GET() {
       },
     });
 
-    // Transform data to match EmployeeTable expectations
     const transformedData = employeeContracts.map(contract => ({
       employee_id: contract.employee.employee_id,
       personal_id: contract.employee.personal_id,
