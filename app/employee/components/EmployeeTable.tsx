@@ -1,10 +1,12 @@
-import { EmployeeTableData } from "@/types/employee-table";
+"use client";
+import { useEmployees } from "@/app/employee/hooks/useEmployees";
 
-interface Props {
-  employees: EmployeeTableData[];
-}
+export default function EmployeeTable() {
+  const { data, isLoading, error } = useEmployees();
 
-export default function EmployeeTable({ employees }: Props) {
+  if (isLoading) return <p>กำลังโหลด...</p>;
+  if (error) return <p>เกิดข้อผิดพลาด: {error.message}</p>;
+  
   return (
     <table className="min-w-full divide-y divide-gray-300">
       <thead className="bg-gray-50">
@@ -30,25 +32,25 @@ export default function EmployeeTable({ employees }: Props) {
         </tr>
       </thead>
       <tbody className="bg-white divide-y divide-gray-200">
-        {employees.map((employee) => (
-          <tr key={employee.employee_id} className='hover:bg-purple-100 cursor-pointer'>
+        {data.map((emp) => (
+          <tr key={emp.employee_id} className='hover:bg-purple-100 cursor-pointer'>
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-              {employee.personal_id}
+              {emp.personal_id}
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-              {employee.employee_code}
+              {emp.employee_code}
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-              {employee.prefix_th} {employee.first_name_th} {employee.last_name_th}
+              {emp.prefix_th} {emp.first_name_th} {emp.last_name_th}
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-              {employee.po_number}
+              {emp.po_number}
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-              {employee.position_name}
+              {emp.position_name}
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-              {new Date(employee.start_date).toLocaleDateString('th-TH')}
+              {new Date(emp.start_date).toLocaleDateString('th-TH')}
             </td>
           </tr>
         ))}
