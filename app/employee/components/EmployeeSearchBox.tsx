@@ -1,7 +1,10 @@
 // app/employee/components/EmployeeSearchBox.tsx
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useState } from "react";
+
 
 interface Props {
   onSearch: (value: string) => void;
@@ -17,19 +20,19 @@ export function EmployeeSearchBox({ onSearch }: Props) {
 
   return (
     <form onSubmit={handleSubmit} className="flex gap-2">
-      <input
+      <Input
         type="text"
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder="ค้นหาพนักงาน..."
         className="border rounded px-3 py-2 w-64"
       />
-      <button
+      <Button
         type="submit"
         className="bg-blue-500 text-white px-4 py-2 rounded"
       >
         ค้นหา
-      </button>
+      </Button>
     </form>
   );
 }
